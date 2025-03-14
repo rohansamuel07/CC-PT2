@@ -1,0 +1,68 @@
+When running your project, follow this sequence:  
+
+### **1️⃣ Start Docker Engine (if not already running)**  
+Since your backend execution relies on Docker, you **must** ensure that Docker Engine is running first.  
+
+- Open **Docker Desktop** and make sure it’s running.  
+- Alternatively, in PowerShell, check if Docker is running:  
+  ```powershell
+  docker info
+  ```
+  If it returns an error, **start Docker Desktop** manually.
+
+---
+
+### **2️⃣ Start the Docker Container (Backend Execution Environment)**  
+Now, run the backend inside Docker using:  
+```powershell
+docker-compose up -d  # Starts the container in detached mode
+```
+This ensures the backend runs inside a secure, containerized environment.
+
+To check if it's running:  
+```powershell
+docker ps
+```
+Make sure `secure-runner` is listed.
+
+---
+
+### **3️⃣ Start the Backend Server (`index.js`)**  
+Your Node.js backend **must** be running to handle API requests:  
+```powershell
+cd server
+node index.js
+```
+This starts the Express server, allowing it to handle incoming API calls.
+
+---
+
+### **4️⃣ Start the Frontend**  
+Finally, run the frontend in **a separate terminal**:  
+```powershell
+cd client
+npm run dev
+```
+Your app should now be fully functional!
+
+---
+
+### **✅ Summary (Order of Execution)**
+1. **Ensure Docker Engine is running**  
+2. **Start the Docker container** → `docker-compose up -d`  
+3. **Run the backend server** → `node index.js`  
+4. **Run the frontend** → `npm run dev`  
+
+Now, test it in **Insomnia/Postman** or visit the frontend in your browser. 🚀
+
+
+ docker run -it -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock online-compiler-backend /bin/bash
+
+ docker run -d -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock online-compiler-backend
+
+docker run -d -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock online-compiler-backend
+
+with env: docker run -d -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock --env-file server/.env online-compiler-backend
+
+docker stop $(docker ps -aq) 
+docker rm $(docker ps -aq) 

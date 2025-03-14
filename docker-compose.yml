@@ -1,0 +1,18 @@
+services:
+  secure-runner:
+    build: .
+    container_name: secure-runner
+    stdin_open: true
+    tty: true
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/usr/src/app  # Mounts the whole server folder correctly
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
